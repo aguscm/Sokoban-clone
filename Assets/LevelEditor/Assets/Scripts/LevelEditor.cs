@@ -6,12 +6,21 @@ using System.Linq;
 
 public class LevelEditor : MonoBehaviour
 {
-
+    
     [SerializeField] Tilemap currentTilemap;
     [SerializeField] TileBase currentTile;
 
     [SerializeField] Camera cam;
 
+    private Vector2 currentTilemapMinBounds;
+    private Vector2 currentTilemapMaxBounds;
+
+
+    private void Start()
+    {
+        currentTilemapMinBounds = new Vector2(currentTilemap.origin.x, currentTilemap.origin.y);
+        currentTilemapMaxBounds = new Vector2(currentTilemap.origin.x + currentTilemap.size.x - 1, currentTilemap.origin.y + currentTilemap.size.y - 1);
+    }
     private void Update()
     {
         Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
@@ -28,7 +37,11 @@ public class LevelEditor : MonoBehaviour
     /// <param name="pos"></param>
     void PlaceTile(Vector3Int pos)
     {
-        currentTilemap.SetTile(pos, currentTile);
+        //Check if it the pos is between the bounds of the tilemap
+        if (pos.x >= currentTilemapMinBounds.x && pos.y >= currentTilemapMinBounds.y && pos.x <= currentTilemapMaxBounds.x && pos.y <= currentTilemapMaxBounds.y)
+        {
+            currentTilemap.SetTile(pos, currentTile);
+        }
     }
 
     /// <summary>

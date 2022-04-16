@@ -5,9 +5,9 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
 
-public class LevelManager : MonoBehaviour
+public class LevelEditorManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelEditorManager instance;
     private void Awake()
     {
         //set up the instance
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L)) LoadLevel();
     }
 
-    void Savelevel()
+    public void Savelevel()
     {
         //get the bounds of the tilemap
         BoundsInt bounds = tilemap.cellBounds;
@@ -63,13 +63,12 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Level was saved");
     }
 
-    void LoadLevel()
+    public void LoadLevel()
     {
-        Debug.Log("principiofunciona");
+
         //load the json file to a leveldata
         string json = File.ReadAllText(Application.dataPath + "/testLevel.json");
         LevelData data = JsonUtility.FromJson<LevelData>(json);
-        Debug.Log(data);
 
         //clear the tilemap
         tilemap.ClearAllTiles();
