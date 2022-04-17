@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
+using TMPro;
+using UnityEngine.UI;
 
 public class LevelEditorManager : MonoBehaviour
 {
@@ -17,16 +19,20 @@ public class LevelEditorManager : MonoBehaviour
 
     public List<CustomTile> tiles = new List<CustomTile>();
     public Tilemap tilemap;
+    public GameObject PrefabButtonLevel;
+    public Transform UIContentLevels;
+    public GameObject UILoadScreen;
+    public LevelEditor levelEditor;
 
     private void Update()
     {
-        //save level when pressing Ctrl + A
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) Savelevel();
-        //load level when pressing Ctrl + L
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L)) LoadLevel();
+        ////save level when pressing Ctrl + A
+        //if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.A)) Savelevel();
+        ////load level when pressing Ctrl + L
+        //if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L)) LoadLevel();
     }
 
-    public void Savelevel()
+    public void Savelevel(TextMeshProUGUI levelName)
     {
         //get the bounds of the tilemap
         BoundsInt bounds = tilemap.cellBounds;
@@ -57,18 +63,43 @@ public class LevelEditorManager : MonoBehaviour
 
         //save the data as a json
         string json = JsonUtility.ToJson(levelData, true);
-        File.WriteAllText(Application.dataPath + "/testLevel.json", json);
+        File.WriteAllText(Application.dataPath + "/Resources/EditorLevels/"+levelName.text+".json", json);
 
         //debug
         Debug.Log("Level was saved");
     }
 
-    public void LoadLevel()
+    public void LoadLevelList()
     {
+        //First, destroy all buttons of levels (if any)
+        foreach (Transform child in UIContentLevels)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        var levels = Resources.LoadAll("EditorLevels", typeof(TextAsset));
+
+        foreach (var t in levels)
+        {
+            GameObject level = Instantiate(PrefabButtonLevel, UIContentLevels);
+            level.GetComponent<Button>().onClick.AddListener(() => LoadLevel(t.name));
+            level.GetComponent<Button>().onClick.AddListener(() => levelEditor.EnableEdition());
+            level.transform.GetComponentInChildren<TextMeshProUGUI>().text = t.name;
+        }
+    }
+
+    public void LoadLevel(string levelName)
+    {
+        //First, deactivate the canvas of the load screen ui
+        UILoadScreen.SetActive(false);
+        //load the json file to a leveldata
+        //string json = File.ReadAllText(Application.dataPath + "/testLevel.json");
+        //LevelData data = JsonUtility.FromJson<LevelData>(json);
 
         //load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + "/testLevel.json");
-        LevelData data = JsonUtility.FromJson<LevelData>(json);
+        TextAsset level = Resources.Load<TextAsset>("EditorLevels/"+levelName);
+
+        LevelData data = JsonUtility.FromJson<LevelData>(level.ToString());
 
         //clear the tilemap
         tilemap.ClearAllTiles();

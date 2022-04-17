@@ -15,6 +15,8 @@ public class LevelEditor : MonoBehaviour
     private Vector2 currentTilemapMinBounds;
     private Vector2 currentTilemapMaxBounds;
 
+    public bool canEdit = true;
+
 
     private void Start()
     {
@@ -23,12 +25,16 @@ public class LevelEditor : MonoBehaviour
     }
     private void Update()
     {
-        Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
+        if (canEdit)
+        {
+            Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
-        //place tile with left click
-        if (Input.GetMouseButton(0)) PlaceTile(pos);
-        //delete tile with right click
-        if (Input.GetMouseButton(1)) DeleteTile(pos);
+            //place tile with left click
+            if (Input.GetMouseButton(0)) PlaceTile(pos);
+            //delete tile with right click
+            if (Input.GetMouseButton(1)) DeleteTile(pos);
+        }
+
     }
 
     /// <summary>
@@ -56,5 +62,15 @@ public class LevelEditor : MonoBehaviour
     public void ChangeCurrentTile(TileBase tile)
     {
         currentTile = tile;
+    }
+
+    public void EnableEdition()
+    {
+        canEdit = true;
+    }
+
+    public void DisableEdition()
+    {
+        canEdit = false;
     }
 }
