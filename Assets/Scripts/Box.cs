@@ -27,9 +27,10 @@ public class Box : MonoBehaviour
         {
             spriteRenderer.color = colorWhenAllocated;
             isAllocated = true;
+            LevelManager.instance.CheckIfWin();
         }
 
-        LevelManager.instance.CheckIfWin();
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

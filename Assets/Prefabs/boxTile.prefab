@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1315181204404255426}
   - component: {fileID: 1732658687920948609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: colUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,11 +40,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 1691979895910209820}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 39919eed51a34e147993ec1c9ad397c9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0063197613, y: 0.44671917}
+  m_Offset: {x: 0.0041439533, y: 0.42056}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7751212, y: 0.08224964}
+  m_Size: {x: 0.79604864, y: 0.029931307}
   m_EdgeRadius: 0
 --- !u!1 &1817055200296522959
 GameObject:
@@ -68,7 +68,8 @@ GameObject:
   - component: {fileID: 3216337813189149086}
   - component: {fileID: 7065809673342400980}
   - component: {fileID: 2124865014722976283}
-  m_Layer: 0
+  - component: {fileID: 4058396919461052662}
+  m_Layer: 7
   m_Name: boxTile
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -157,7 +158,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5.57
+  m_Mass: 17
   m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -165,7 +166,23 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
+--- !u!114 &4058396919461052662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817055200296522959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee6cc569b82d784c8071bd89d12ce24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topCol: {fileID: 1732658687920948609}
+  rightCol: {fileID: 8896243958719632241}
+  bottomCol: {fileID: 53472532475205385}
+  leftCol: {fileID: 3137248341540260381}
 --- !u!1 &2181800939877870183
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 704284519951062768}
   - component: {fileID: 8896243958719632241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: colRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,11 +223,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 2181800939877870183}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 39919eed51a34e147993ec1c9ad397c9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.45279694, y: -0.012155652}
+  m_Offset: {x: 0.42925382, y: -0.029159069}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -221,7 +238,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.09440613, y: 0.74473166}
+  m_Size: {x: 0.04731989, y: 0.72118807}
   m_EdgeRadius: 0
 --- !u!1 &5422727226476663211
 GameObject:
@@ -233,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5388657287815600469}
   - component: {fileID: 53472532475205385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: colDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,11 +280,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 5422727226476663211}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 39919eed51a34e147993ec1c9ad397c9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0063197613, y: -0.46}
+  m_Offset: {x: -0.016783237, y: -0.43907273}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -278,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7751212, y: 0.08224964}
+  m_Size: {x: 0.7123394, y: 0.04039502}
   m_EdgeRadius: 0
 --- !u!1 &6981197358611503752
 GameObject:
@@ -290,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3106730761475782095}
   - component: {fileID: 3137248341540260381}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: colLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,11 +337,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 6981197358611503752}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 39919eed51a34e147993ec1c9ad397c9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.45, y: -0.012155652}
+  m_Offset: {x: -0.422533, y: -0.0147714615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -335,7 +352,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.09440613, y: 0.74473166}
+  m_Size: {x: 0.039472163, y: 0.69241333}
   m_EdgeRadius: 0
 --- !u!1 &8990924302455485103
 GameObject:
@@ -348,7 +365,7 @@ GameObject:
   - component: {fileID: 1680012158417949045}
   - component: {fileID: 3130144103352498300}
   - component: {fileID: 7718662091343743172}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: colCentral
   m_TagString: Untagged
   m_Icon: {fileID: 0}

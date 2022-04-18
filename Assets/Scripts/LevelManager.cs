@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,12 +15,17 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     //Level counter
-    public static int CurrentLevel;
-    public static int TotalLevels;
-    private bool levelChangeChecker; //Variable to check to not add the current level for calling the Win() function more than once;
+    public static int CurrentLevel = 1;
+    public static int TotalLevels = 10;
+    public Object[] Levels;
+    public bool levelChangeChecker = false; //Variable to check to not add the current level for calling the Win() function more than once;
 
     //Boxes list in order to check if there are allocated
     public List<Box> boxes = new List<Box>();
+
+    //Debug
+    public GameObject PrefabButtonLevel;
+    public Transform UI;
 
     private void Awake()
     {
@@ -34,7 +41,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadLevel(1);
+        Levels = Resources.LoadAll("GameLevels", typeof(TextAsset));
+        LoadLevel(Levels[CurrentLevel-1].name);
     }
 
     // Update is called once per frame
@@ -43,11 +51,10 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void LoadLevel (int levelIndex)
+    public void LoadLevel (string levelName)
     {
-
         //load the json file to a leveldata
-        TextAsset level = Resources.Load<TextAsset>("GameLevels/testLevel");
+        TextAsset level = Resources.Load<TextAsset>("GameLevels/" + levelName);
 
         LevelData data = JsonUtility.FromJson<LevelData>(level.ToString());
 
@@ -61,11 +68,11 @@ public class LevelManager : MonoBehaviour
             GameObject goToInstantiate = gameObjects.Find(t => t.name == data.tiles[i]);
             Vector3Int positionToInstantiate = new Vector3Int(data.poses_x[i], data.poses_y[i], 0);
 
-            Instantiate(goToInstantiate, positionToInstantiate, Quaternion.identity);
+            GameObject goInstantiated = Instantiate(goToInstantiate, positionToInstantiate, Quaternion.identity);
 
             if (goToInstantiate.name == "boxTile")
             {
-                boxes.Add(goToInstantiate.GetComponentInChildren<Box>());
+                boxes.Add(goInstantiated.GetComponentInChildren<Box>());
             }
         }
 
@@ -75,7 +82,7 @@ public class LevelManager : MonoBehaviour
 
     public void CheckIfWin()
     {
-
+        Debug.Log("check if win");
         foreach (Box box in boxes)
         {
             if (box.isAllocated == false)
@@ -84,7 +91,7 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        //If the loop arrives here, it meants the level is won
+        //If the loop arrives here, it means the level is won
         Win();
 
     }

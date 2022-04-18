@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -97,7 +97,16 @@ public class LevelEditorManager : MonoBehaviour
         //LevelData data = JsonUtility.FromJson<LevelData>(json);
 
         //load the json file to a leveldata
+        //string path = "EditorLevels/" + levelName;
+        //Debug.Log(path);
+        //string path2 = "EditorLevels/sosa";
+        //Debug.Log(path2);
+        //Debug.Log(path == path2);
         TextAsset level = Resources.Load<TextAsset>("EditorLevels/"+levelName);
+        //Debug.Log(level);
+        //Debug.Log(levelName);
+        //Debug.Log(levelName == "sosa​");
+        //level = Resources.Load<TextAsset>("EditorLevels/" + "sosa");
 
         LevelData data = JsonUtility.FromJson<LevelData>(level.ToString());
 
@@ -107,7 +116,6 @@ public class LevelEditorManager : MonoBehaviour
         //place the tiles
         for (int i = 0; i < data.tiles.Count; i++)
         {
-            Debug.Log(data.tiles[i]);
             tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tiles.Find(t => t.name == data.tiles[i]).tile);
         }
 
