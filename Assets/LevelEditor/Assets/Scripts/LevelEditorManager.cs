@@ -90,24 +90,11 @@ public class LevelEditorManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
-        //First, deactivate the canvas of the load screen ui
+        //First, deactivate the canvas of the load s
+        //creen ui
         UILoadScreen.SetActive(false);
         //load the json file to a leveldata
-        //string json = File.ReadAllText(Application.dataPath + "/testLevel.json");
-        //LevelData data = JsonUtility.FromJson<LevelData>(json);
-
-        //load the json file to a leveldata
-        //string path = "EditorLevels/" + levelName;
-        //Debug.Log(path);
-        //string path2 = "EditorLevels/sosa";
-        //Debug.Log(path2);
-        //Debug.Log(path == path2);
         TextAsset level = Resources.Load<TextAsset>("EditorLevels/"+levelName);
-        //Debug.Log(level);
-        //Debug.Log(levelName);
-        //Debug.Log(levelName == "sosa​");
-        //level = Resources.Load<TextAsset>("EditorLevels/" + "sosa");
-
         LevelData data = JsonUtility.FromJson<LevelData>(level.ToString());
 
         //clear the tilemap
